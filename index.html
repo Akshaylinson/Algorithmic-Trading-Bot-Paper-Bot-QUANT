@@ -1,1 +1,612 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantBot | Algorithmic Trading Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#059669',
+                        secondary: '#0f172a',
+                        accent: '#10b981',
+                        success: '#059669',
+                        danger: '#dc2626',
+                        warning: '#d97706',
+                        info: '#0891b2'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1c4532 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 10px;
+        }
+        .chart-container {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 10px;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #10b981;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #065f46 0%, #059669 100%);
+        }
+        .code-block {
+            background: #1a202c;
+            border-left: 4px solid #059669;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="gradient-bg text-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-robot text-2xl text-accent"></i>
+                    <span class="text-xl font-bold">QuantBot</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#dashboard" class="nav-link">Dashboard</a>
+                    <a href="#architecture" class="nav-link">Architecture</a>
+                    <a href="#setup" class="nav-link">Get Started</a>
+                </nav>
+                <button class="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
+                    <i class="fas fa-rocket mr-2"></i>Launch Bot
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Algorithmic Trading Bot</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10">
+                AI-assisted paper trading platform with SMA/EMA crossover strategies and real-time market data
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <button class="bg-white text-primary px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-play-circle mr-2"></i>Live Demo
+                </button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition-colors">
+                    <i class="fab fa-github mr-2"></i>View Code
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Advanced Trading Features</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+                Our algorithmic trading platform provides comprehensive tools for strategy development and paper trading.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-hover bg-gray-50 p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-12 h-12 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">SMA & EMA Strategies</h3>
+                    <p class="text-gray-600">Automated computation of Simple and Exponential Moving Averages with buy/sell signal visualization.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="card-hover bg-gray-50 p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-12 h-12 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-layer-group text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Multi-Ticker Dashboard</h3>
+                    <p class="text-gray-600">Monitor up to 6 tickers simultaneously with configurable daily or weekly data views.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="card-hover bg-gray-50 p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-12 h-12 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-newspaper text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Paper Trading</h3>
+                    <p class="text-gray-600">Integrated with Alpaca Paper Broker for realistic trading simulation without financial risk.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="card-hover bg-gray-50 p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-12 h-12 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-wallet text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Portfolio Management</h3>
+                    <p class="text-gray-600">Track paper trading account equity, open positions, and performance metrics in real-time.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="card-hover bg-gray-50 p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-12 h-12 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-calculator text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Dynamic Position Sizing</h3>
+                    <p class="text-gray-600">Automatic calculation using percentage of total equity with adjustable allocation slider.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="card-hover bg-gray-50 p-6 rounded-xl shadow-md border border-gray-100">
+                    <div class="w-12 h-12 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-database text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Data Fallback System</h3>
+                    <p class="text-gray-600">Seamless fallback to yFinance when Alpaca API is unavailable for uninterrupted operation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section id="dashboard" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Interactive Trading Dashboard</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+                Experience the power of our Streamlit-powered dashboard with real-time trading controls.
+            </p>
+            
+            <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- Dashboard Header -->
+                <div class="bg-secondary text-white p-4 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-robot"></i>
+                        <span class="font-bold">QuantBot Dashboard</span>
+                    </div>
+                    <div class="text-sm">
+                        <span class="bg-accent px-2 py-1 rounded">Paper Trading Mode</span>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Configuration Panel -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-3 text-gray-800">Configuration Panel</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Ticker Symbols</label>
+                                    <input type="text" value="AAPL, MSFT, TSLA, GOOGL" class="w-full p-2 border border-gray-300 rounded">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Time Frame</label>
+                                    <select class="w-full p-2 border border-gray-300 rounded">
+                                        <option>Daily</option>
+                                        <option>Weekly</option>
+                                    </select>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">SMA Period</label>
+                                        <input type="number" value="20" class="w-full p-2 border border-gray-300 rounded">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">EMA Period</label>
+                                        <input type="number" value="50" class="w-full p-2 border border-gray-300 rounded">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Position Size (% of equity)</label>
+                                    <input type="range" min="1" max="100" value="25" class="w-full">
+                                    <div class="text-center text-sm text-gray-600">25%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Trading Controls -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-3 text-gray-800">Trading Controls</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Ticker</label>
+                                    <select class="w-full p-2 border border-gray-300 rounded">
+                                        <option>AAPL</option>
+                                        <option>MSFT</option>
+                                        <option>TSLA</option>
+                                        <option>GOOGL</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Order Type</label>
+                                    <select class="w-full p-2 border border-gray-300 rounded">
+                                        <option>Market</option>
+                                        <option>Limit</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                                    <input type="number" value="10" class="w-full p-2 border border-gray-300 rounded">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button class="bg-success text-white py-2 rounded font-semibold">
+                                        <i class="fas fa-arrow-up mr-1"></i> BUY
+                                    </button>
+                                    <button class="bg-danger text-white py-2 rounded font-semibold">
+                                        <i class="fas fa-arrow-down mr-1"></i> SELL
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Account Summary -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-bold text-lg mb-3 text-gray-800">Account Summary</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Account Value:</span>
+                                    <span class="font-semibold">$25,430.50</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Buying Power:</span>
+                                    <span class="font-semibold">$19,072.88</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Open P&L:</span>
+                                    <span class="font-semibold text-success">+$342.25</span>
+                                </div>
+                                <div class="pt-2 border-t border-gray-200">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-600">AAPL:</span>
+                                        <span>15 shares</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-600">MSFT:</span>
+                                        <span>8 shares</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-600">TSLA:</span>
+                                        <span>5 shares</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trade History -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3 text-gray-800">Trade History</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-2 text-sm font-medium text-gray-700">Time</th>
+                                        <th class="text-left py-2 text-sm font-medium text-gray-700">Symbol</th>
+                                        <th class="text-left py-2 text-sm font-medium text-gray-700">Side</th>
+                                        <th class="text-left py-2 text-sm font-medium text-gray-700">Qty</th>
+                                        <th class="text-left py-2 text-sm font-medium text-gray-700">Price</th>
+                                        <th class="text-left py-2 text-sm font-medium text-gray-700">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b">
+                                        <td class="py-2 text-sm">10:25:32</td>
+                                        <td class="py-2 text-sm">AAPL</td>
+                                        <td class="py-2 text-sm text-success font-semibold">BUY</td>
+                                        <td class="py-2 text-sm">10</td>
+                                        <td class="py-2 text-sm">$172.50</td>
+                                        <td class="py-2 text-sm"><span class="bg-success text-white px-2 py-1 rounded text-xs">Filled</span></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="py-2 text-sm">10:15:47</td>
+                                        <td class="py-2 text-sm">MSFT</td>
+                                        <td class="py-2 text-sm text-success font-semibold">BUY</td>
+                                        <td class="py-2 text-sm">5</td>
+                                        <td class="py-2 text-sm">$335.80</td>
+                                        <td class="py-2 text-sm"><span class="bg-success text-white px-2 py-1 rounded text-xs">Filled</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 text-sm">09:58:12</td>
+                                        <td class="py-2 text-sm">TSLA</td>
+                                        <td class="py-2 text-sm text-danger font-semibold">SELL</td>
+                                        <td class="py-2 text-sm">3</td>
+                                        <td class="py-2 text-sm">$245.60</td>
+                                        <td class="py-2 text-sm"><span class="bg-success text-white px-2 py-1 rounded text-xs">Filled</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Project Architecture</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+                Modular design with clear separation of concerns for maintainability and extensibility.
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-secondary text-white p-6 rounded-xl mb-6">
+                    <h3 class="text-xl font-bold mb-4">Project Structure</h3>
+                    <div class="font-mono text-sm space-y-2">
+                        <div class="flex">
+                            <span class="text-accent mr-2">Algorithmic-Trading-Bot/</span>
+                        </div>
+                        <div class="flex ml-4">
+                            <span class="text-accent mr-2">├──</span> quantbot/
+                        </div>
+                        <div class="flex ml-8">
+                            <span class="text-accent mr-2">├──</span> broker.py <span class="text-gray-400 ml-2"># Handles paper/live trading via Alpaca</span>
+                        </div>
+                        <div class="flex ml-8">
+                            <span class="text-accent mr-2">├──</span> utils.py <span class="text-gray-400 ml-2"># Fetches OHLC data (Alpaca/yFinance)</span>
+                        </div>
+                        <div class="flex ml-8">
+                            <span class="text-accent mr-2">├──</span> strategy.py <span class="text-gray-400 ml-2"># Technical indicators and logic</span>
+                        </div>
+                        <div class="flex ml-8">
+                            <span class="text-accent mr-2">└──</span> runner.py <span class="text-gray-400 ml-2"># Command-line bot runner</span>
+                        </div>
+                        <div class="flex ml-4">
+                            <span class="text-accent mr-2">├──</span> streamlit_app.py <span class="text-gray-400 ml-2"># Interactive dashboard</span>
+                        </div>
+                        <div class="flex ml-4">
+                            <span class="text-accent mr-2">├──</span> run_bot.py <span class="text-gray-400 ml-2"># CLI script for trading loop</span>
+                        </div>
+                        <div class="flex ml-4">
+                            <span class="text-accent mr-2">└──</span> requirements.txt <span class="text-gray-400 ml-2"># Python dependencies</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Core Dependencies</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fab fa-python text-primary mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-semibold">Streamlit</span>
+                                    <p class="text-sm text-gray-600">Dashboard UI framework</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-exchange-alt text-success mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-semibold">Alpaca Trade API</span>
+                                    <p class="text-sm text-gray-600">Broker connection for paper/live trading</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-database text-info mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-semibold">Pandas</span>
+                                    <p class="text-sm text-gray-600">Data manipulation and analysis</p>
+                                </div>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-chart-line text-warning mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-semibold">yFinance</span>
+                                    <p class="text-sm text-gray-600">Fallback price data provider</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Future Enhancements</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-bar text-accent mr-3 mt-1"></i>
+                                <span>P&L tracking and performance analysis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-bell text-warning mr-3 mt-1"></i>
+                                <span>Email / Telegram trade alerts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-danger mr-3 mt-1"></i>
+                                <span>Risk-based position sizing with stop-loss</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-broadcast-tower text-info mr-3 mt-1"></i>
+                                <span>WebSocket live price streaming</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-lock text-primary mr-3 mt-1"></i>
+                                <span>Secure authentication for hosted dashboard</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Guide -->
+    <section id="setup" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Get Started in Minutes</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">
+                Follow these simple steps to set up the Algorithmic Trading Bot on your machine.
+            </p>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Quick Setup Guide</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-accent rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3 flex-shrink-0 text-white">1</div>
+                            <div>
+                                <p class="font-semibold">Clone the repository</p>
+                                <div class="code-block p-3 rounded mt-2">
+                                    <code class="text-green-400">git clone https://github.com/your-username/Algorithmic-Trading-Bot.git</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-accent rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3 flex-shrink-0 text-white">2</div>
+                            <div>
+                                <p class="font-semibold">Create and activate virtual environment</p>
+                                <div class="code-block p-3 rounded mt-2">
+                                    <code class="text-green-400">python -m venv venv</code><br>
+                                    <code class="text-green-400">venv\Scripts\activate  # Windows</code><br>
+                                    <code class="text-green-400">source venv/bin/activate  # Mac/Linux</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-accent rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3 flex-shrink-0 text-white">3</div>
+                            <div>
+                                <p class="font-semibold">Install dependencies</p>
+                                <div class="code-block p-3 rounded mt-2">
+                                    <code class="text-green-400">pip install -r requirements.txt</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-accent rounded-full w-6 h-6 flex items-center justify-center mt-1 mr-3 flex-shrink-0 text-white">4</div>
+                            <div>
+                                <p class="font-semibold">Set up environment variables</p>
+                                <div class="code-block p-3 rounded mt-2">
+                                    <code class="text-gray-400"># Create .env file with:</code><br>
+                                    <code class="text-green-400">MODE=ALPACA</code><br>
+                                    <code class="text-green-400">ALPACA_KEY=your_alpaca_api_key</code><br>
+                                    <code class="text-green-400">ALPACA_SECRET=your_alpaca_secret_key</code><br>
+                                    <code class="text-green-400">ALPACA_BASE_URL=https://paper-api.alpaca.markets</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Run CLI Trading Bot</h3>
+                        <div class="code-block p-4 rounded mb-4">
+                            <code class="text-green-400">python run_bot.py</code>
+                        </div>
+                        <p class="text-gray-600">Starts the continuous trading loop and executes simulated/paper trades automatically.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Launch Streamlit Dashboard</h3>
+                        <div class="code-block p-4 rounded mb-4">
+                            <code class="text-green-400">streamlit run streamlit_app.py</code>
+                        </div>
+                        <p class="text-gray-600">Opens the interactive dashboard at <span class="font-mono text-accent">http://localhost:8501</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Algorithmic Trading?</h2>
+            <p class="text-xl max-w-2xl mx-auto mb-10">
+                Experiment with paper trading strategies risk-free using our advanced trading platform.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <button class="bg-white text-primary px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-download mr-2"></i>Download Now
+                </button>
+                <button class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-white hover:text-primary transition-colors">
+                    <i class="fas fa-book mr-2"></i>View Documentation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-robot text-2xl text-accent"></i>
+                        <span class="text-xl font-bold">QuantBot</span>
+                    </div>
+                    <p class="text-gray-400">
+                        AI-assisted algorithmic trading platform for strategy development and paper trading.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API Reference</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p><i class="fas fa-exclamation-triangle text-warning mr-2"></i>Disclaimer: This bot is for educational and research purposes only. Trading involves risk. Use paper trading mode for experimentation.</p>
+                <p class="mt-2">&copy; 2023 QuantBot Algorithmic Trading Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
